@@ -1,0 +1,823 @@
+
+<!DOCTYPE html>
+<html lang="it-IT">
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+
+	<title>HUB|Your home</title>
+	<meta name="description" content="A futuristic customizable homepage. No cookies, light, fast, set it as starting page on your browser.">
+	<meta name="keywords" content="hub,home,homepage,search,preferiti,bookmarks,bookmark,segnalibri,start,launcher,cyber,cyberpunk">
+	<meta name="author" content="">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<style>
+
+html, body{
+	margin: 0;
+	background-color: rgb(242,243,244);/*#060C1A;*/
+	font-family: 'Orbitron', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: rgb(7, 20, 17); /*#C3E6DE;*/
+	text-shadow: 0px 0px 6px rgba(195,230,220,0.5);
+	/*background-image: linear-gradient(to right, rgba(18, 223, 227, 0.25), rgba(172, 69, 102, 0.25)), url('http://loder.altervista.org/bckgrnd.jpg')/*url('giphy.gif')*/;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0% 50%;*/
+	height: 100%;
+}
+
+.disposer{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.left{
+	width: 250px;
+	margin: 5px;
+	padding: 20px;
+	-webkit-box-sizing: border-box; 
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.left a:link, a:visited{
+	text-decoration: none;
+}
+
+.menu{
+
+}
+
+.menu a:link, a:visited{
+	color: rgb(7, 20, 17); /*#C3E6DE;*/
+}
+
+.mid{
+	width: 100%;
+}
+
+.bookmark{
+	font-weight: bold;
+	background-color: #C3E6DE;
+	color: black;
+	padding: 4px;
+	letter-spacing: 2px;
+	font-size: 12px;
+	box-shadow: 0px 0px 6px rgba(195,230,220,0.5);
+}
+
+.voiceSX{
+	border: 1px solid #C3E6DE;
+	font-size: 12px;
+	margin: 3px 0px 3px 0px;
+	padding: 3px 0px 3px 6px;
+}
+
+.voiceSX a:link, a:visited{
+	color: #C3E6DE;
+	text-decoration: none;
+	border: 1px solid transparent;
+}
+
+.voiceSX:hover{
+	background-color: #C3E6DE;
+	color: black;
+	font-weight: bold;
+	box-shadow: 0px 0px 6px rgba(195,230,220,0.5);
+}
+
+.menu a:hover{
+	text-decoration: none;
+}
+
+
+
+/************************* M    I      D ********************************************/
+
+.pager{
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	z-index: 1;
+}
+
+.title{
+	width: 100%;
+	color: rgb(7, 20, 17); /*#C3E6DE;*/
+	font-size: 2em;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.title a:link, a:visited{
+	padding: 2px 5px 2px 5px;
+	text-decoration: none;
+	border: 1px solid transparent;
+	color: rgb(7, 20, 17); /*#C3E6DE;*/
+}
+
+.title a:link:hover, a:visited:hover{
+	background-color: #C3E6DE;
+	color: black;
+	text-decoration: none;
+	border: 1px solid #C3E6DE;
+	box-shadow: 0px 0px 6px rgba(195,230,220,0.5);
+}
+
+.section{
+	color: rgb(7, 20, 17); /*#C3E6DE;*/
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.section a:link, a:visited{
+	color: rgb(7, 20, 17); /*#C3E6DE;*/
+	text-decoration: none;
+}
+
+.voice{
+	width: 180px;
+	height: 90px;
+	padding: 4px;
+	border: 1px solid #C3E6DE;
+	font-size: 11px;
+	word-break: break-all;
+}
+
+.voice:hover, .voice:focus, .voice:active{
+	padding: 4px;
+	background-color: rgba(195, 230, 222,0.5);
+	color: black;
+	cursor: pointer;
+}
+
+.space-btw{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+}
+
+.add{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 1.5em;
+}
+
+.row{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.row a:link, a:visited{
+	text-decoration: none;
+	color: #C3E6DE; ;
+}
+
+
+.form{
+	position: fixed;
+	display: none;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	color: #C3E6DE;
+	background-color: rgba(0,0,0,0.2);
+	font-size: 16px;
+	z-index: 2;
+ 	cursor: pointer;
+ 	flex-direction: column;
+ 	flex-wrap: nowrap;
+ 	justify-content: center;
+ 	align-items: center;
+ 	font-family: 'Orbitron', sans-serif;
+}
+
+.insert{
+	display: block;
+	background-color: black;
+	border: 1px solid #C3E6DE;;
+	color: #C3E6DE;;
+	padding: 5px;
+	letter-spacing: 2px;
+	font-size: 1.5em;
+	margin-top: 2px;
+}
+
+.close{
+	background-color: black;
+	color: red;
+	margin-top:5px;
+	padding: 5px;
+	border: 1px solid red;
+}
+
+.close:hover{
+	background-color: red;
+	color: black;
+	cursor: pointer;
+}
+
+.confirm{
+	background-color: black;
+	color: #C3E6DE;
+	font-family: 'Orbitron', sans-serif;
+	font-size: 1em;
+}
+
+.confirm:hover{
+	background-color: #C3E6DE;
+	color: black;
+	cursor: pointer;
+}
+
+.lefter{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-end;
+	margin-top: 5px;
+}
+
+.clear{
+	background-color: transparent;
+	color: rgb(7, 20, 17); /*#C3E6DE;*/
+	border: 1px solid #C3E6DE;
+	padding: 5px;
+	font-size: 1em;
+	font-family: 'Orbitron', sans-serif;
+	width: 200px;
+	margin-left: 2px;
+}
+
+.clear:hover{
+	color: black;
+	background-color: #C3E6DE;
+	cursor: pointer;
+}
+
+.head{
+	width: 100%;
+}
+
+.search{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.search_input{
+	color:rgb(7, 20, 17); /*#C3E6DE;*/
+	margin: 0px 0px 10px 0px;
+	padding: 6px;
+	background-color: rgba(0,0,0,0.3);
+	border: 1px solid transparent;
+	border-bottom: 1px solid #C3E6DE;
+	font-size: 1em;
+	letter-spacing: 1px;
+	width: 100%;
+	max-width: 400px;
+	outline: none;
+	font-family: 'Orbitron', sans-serif;
+	letter-spacing: 2px;
+}
+
+.search_submit{
+	color:#C3E6DE;
+	margin: 0px 0px 10px 2px;
+	padding: 6px 10px 7px 10px;
+	background-color: rgba(0,0,0,0.3);
+	border: 1px solid transparent;
+	font-size: 1em;
+}
+
+.search_submit:hover{
+	background-color: #C3E6DE;
+	color: black;
+	cursor: pointer;
+
+}
+
+/**************************** END MID  ********************************************/
+
+.right{
+	text-align: right;
+	width: 200px;
+	padding: 20px;
+}
+
+#mid2{
+	display: none;
+	padding: 10px 5px 5px 15px;
+	margin: 10px;
+}
+
+#mid3{
+	display: none;
+	padding: 10px 5px 5px 15px;
+	margin: 10px;
+}
+
+.midder{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+#mid4{
+	display: none;
+	padding: 10px 5px 5px 15px;
+	margin: 10px;
+}
+
+/*-------------------------------------------------*/
+
+.area{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: flex-start;
+	color: white;
+	width: 100%;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+
+.button{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: space-between;
+	height: 70px;
+	width: 70px;
+	border: 1px solid #C3E6DE;
+	color: rgb(7, 20, 17); /*#C3E6DE;*/
+	margin-right: 10px;
+}
+
+.button:hover{
+background-color: rgba(195, 230, 222,0.5); /* #C3E6DE;*/
+	color: black;
+}
+
+.text{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: flex-end;
+	height: 42px;
+	font-size: 28px;
+	font-weight: normal;
+}
+
+.text_area{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+	justify-content: center;
+	height: 28px;
+	font-size: 8px;
+}
+
+.area a:link, a:visited{
+	text-decoration: none;
+	color: rgb(7, 20, 17); /*#C3E6DE;*/
+}
+
+.disposer-time{
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: flex-end;
+	justify-content: flex-start;
+}
+
+.time{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: flex-start;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+.data{
+
+}
+
+.cookie{
+	font-size: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.midder-disposer{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+}
+
+@media screen and (max-width: 800px){
+
+	.pager{
+		padding: 5px;
+	}
+
+	.row{
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	.voice{
+		width: 100px;
+		height: 90px;
+	}
+
+	.add{
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		font-size: 1.5em;
+	}
+
+	.disposer{
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+	}
+
+	.left{
+		width: 100%;
+		margin: 0;
+		padding: 15px;
+	}
+
+	.right{
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		text-align: center;
+		font-size: 12px;
+	}
+
+	.disposer-time{
+
+		align-items: center;	
+	}	
+}
+
+@media screen and (max-width: 480px){
+	.button{
+		width: 15vw;
+		height: 15vw;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.text{
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		font-size: 20px;
+	}
+
+	.text_area{
+		display: none;
+	}
+
+	.right{
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		text-align: center;
+		font-size: 12px;
+	}
+
+	.disposer-time{
+
+		align-items: center;	
+	}
+}
+
+</style>
+</head>
+
+<body onload="reload()">
+
+<div class="disposer">
+
+	<div class="left">
+		<div class="menu">
+			<div class="bookmark">> SECTIONS:</div>
+			<a href="#mid1" onclick="hide('mid1')"><div class="voiceSX">Home</div></a>
+			<!-- <a href="#mid2" onclick="hide('mid2')"><div class="voiceSX"></div></a>
+			<a href="#mid3" onclick="hide('mid3')"><div class="voiceSX"></div></a>
+			<a href="#mid4" onclick="hide('mid4')"><div class="voiceSX"></div></a> -->
+		</div> 
+	</div>
+
+	<div class="mid">
+
+		<div class="pager" id="mid1">
+
+		<div class="title"><a href="https://loder.altervista.org">HUB</a></div>
+
+		<div class="head">
+		    <div class="ricerca">
+		        <form method="get" action="https://www.google.com/search"/ class="search">
+		    		<input class="search_input" id="input_field" type="text" name="q" size=""  maxlength="256" value="" placeholder=" Search_" autofocus/>
+		    		<input class="search_submit" type="submit" value=">" target="_blank"/>
+		    	</form>
+		    </div>
+		</div>
+
+		<div class="area">
+			<a href="https://web.whatsapp.com/" target="_blank"><div class="button">
+				<div class="text"><i class="fab fa-whatsapp"></i></div>
+				<div class="text_area">Whatsapp</div>
+			</div></a>
+			<a href="https://www.instagram.com/" target="_blank"><div class="button">
+				<div class="text"><i class="fab fa-instagram"></i></div>
+				<div class="text_area">Instagram</div>
+			</div></a>
+			<a href="https://www.youtube.com/" target="_blank"><div class="button">
+				<div class="text"><i class="fab fa-youtube"></i></div>
+				<div class="text_area">YouTube</div>
+			</div></a>
+			<a href="https://www.facebook.com/" target="_blank"><div class="button">
+				<div class="text"><i class="fab fa-facebook-f"></i></div>
+				<div class="text_area">Facebook</div>
+			</div></a>
+			<a href="https://github.com/" target="_blank"><div class="button">
+				<div class="text"><i class="fab fa-github"></i></div>
+				<div class="text_area">GitHub</div>
+			</div></a>
+		</div>
+
+		<div class="section">
+			<div class="row" id="riga">
+				<div class="voice add" id="a0" onclick="on(), check()"><i class="fal fa-plus-circle"></i></div>
+			</div>
+		</div>
+
+		<div class="lefter">
+			<button class="clear" onclick="remove()">Remove last item</button>
+			<button class="clear" onclick="deleteItem()">Restart</button>
+		</div>
+
+	</div>
+
+	<div class="form" id="form">
+		<div class="">Add site:</div>
+		<input class="insert" type="text" name="url" placeholder=" url_" id="url">
+		<input class="insert" type="text" name="name" placeholder=" name_" id="name">
+		<input class="insert confirm" type="submit" onclick="save(), load()" value="ADD">
+		<div class="close" onclick="off()">CLOSE</div>
+	</div>
+
+<div class="midder" id="mid2">
+	<div class="midder-disposer">
+		<div class="midder-title">home/section2/blank.sct</div>
+		<div class="midder-title"></div>
+	</div>
+</div>
+
+<div class="midder" id="mid3"></div>
+
+<div class="midder" id="mid4"></div>
+
+</div>  <!--MID-->
+
+
+<div class="right">Time:
+	<div class="disposer-time">
+		<div class="time" id="time"></div>
+
+		<div class="data" id="data"></div>
+		<div class="data" id="giorno"></div>
+		<div class="cookie">It's too hot for cookies!</div>
+	</div>
+</div>
+
+</div>
+
+</body>
+</html>
+
+
+<!--  -------------------------- START O F  M I D  S C R I P T -------------------------  -->
+<script>
+  function store(){
+     var s = document.getElementById("site");
+     localStorage.setItem("site", s.value);
+    }
+</script>
+
+<script>
+
+
+function on() {
+  document.getElementById("form").style.display = "flex";
+}
+
+function off() {
+  document.getElementById("form").style.display = "none";
+}
+
+</script>
+
+<script>
+
+function check(){
+	document.getElementById("form").style.display = "flex";
+}
+
+function load(){
+	var i = localStorage.getItem('counter_1');
+	i = --i;
+
+	var a_url = 'a' + i + "_url";
+	var a_name = 'a' + i + "_name";
+
+	var b = localStorage.getItem(a_url);
+	var c = localStorage.getItem(a_name);
+
+    $("#riga").prepend("<a href='" + b + "' target='_blank' id='a" + i +"'><div class='voice'>"+ c + "</div></a>");
+}
+
+function save(){
+	var i = localStorage.getItem('counter_1');
+	if (i === null){
+		localStorage.setItem('counter_1', 0);
+		i = localStorage.getItem('counter_1');
+	} else {
+		i = localStorage.getItem('counter_1');
+	}
+
+	var x = document.getElementById("url");
+	var y = document.getElementById("name");
+
+	var a_url = 'a' + i + "_url";
+	var a_name = 'a' + i + "_name";
+	localStorage.setItem(a_url, x.value);
+	localStorage.setItem(a_name, y.value);
+	i = ++i;
+	localStorage.setItem('counter_1', i);
+}
+
+function reload(){
+
+	var i = localStorage.getItem('counter_1');
+	for (k = 0; k < i; k++){
+
+	var a_url = 'a' + k + "_url";
+	var a_name = 'a' + k + "_name";
+
+	var b = localStorage.getItem(a_url);
+	var c = localStorage.getItem(a_name);
+
+    $("#riga").prepend("<a href='" + b + "' target='_blank'><div class='voice'>"+ c + "</div></a>");
+	}
+
+	document.getElementById('input_field').value = '';
+}
+
+
+function deleteItem() {
+  localStorage.clear();
+  location.reload();
+}
+
+function remove(){
+	var i = localStorage.getItem('counter_1');
+	if (i == 0 || i == null){
+		localStorage.clear();
+  		location.reload();
+	} else {
+		localStorage.setItem('counter_1', --i);
+		var b = '#a'+i;
+		$(b).remove();
+
+		var a_url = 'a' + i + "_url";
+		var a_name = 'a' + i + "_name";
+		localStorage.removeItem(a_url);
+		localStorage.removeItem(a_name);
+				  		location.reload();
+	}
+
+}
+
+</script>
+
+<script>
+console.log(localStorage);
+</script>
+
+<!--  -------------------------- E N D  O F  M I D  S C R I P T -------------------------  -->
+
+<script>
+
+function hide(a){
+	var x = document.getElementById("mid1");
+	var y = document.getElementById("mid2");
+	var z = document.getElementById("mid3");
+	var m4 = document.getElementById("mid4");
+
+	x.style.display = "none";
+	y.style.display = "none";
+	z.style.display = "none";
+	m4.style.display = "none";
+
+	var t = document.getElementById(a);
+
+	t.style.display = "flex";
+}
+
+</script>
+
+<script type="text/javascript">
+
+function updateClock() {
+	var d = new Date();
+	var ms = d.getMilliseconds();
+	var s = d.getSeconds();
+	var m = d.getMinutes();
+	var h = d.getHours();
+
+	document.getElementById("time").innerHTML = h + ':' + m + ':' + s;
+	setTimeout(updateClock, 1000);
+}
+updateClock();
+</script>
+
+<script type="text/javascript">
+
+function data() {
+	var today = new Date();
+	var dd = String(today.getDate()).padStart(2, '0');
+	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+	var yyyy = today.getFullYear();
+
+	today = dd + '/' + mm + '/' + yyyy;
+
+	document.getElementById("data").innerHTML = today;
+
+	var d = new Date()
+	var weekday = new Array(7);
+	weekday[0] = "Sunday";
+	weekday[1] = "Monday";
+	weekday[2] = "Tuesday";
+	weekday[3] = "Wednesday";
+	weekday[4] = "Thursday";
+	weekday[5] = "Friday";
+	weekday[6] = "Saturday";
+
+	var n = weekday[d.getDay()];
+	document.getElementById("giorno").innerHTML = n;
+}
+
+data();
+
+</script>
